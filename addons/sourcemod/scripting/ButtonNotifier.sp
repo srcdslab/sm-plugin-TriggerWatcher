@@ -33,7 +33,7 @@ public Plugin myinfo =
 	name = "Button & Triggers Notifier",
 	author = "Silence, maxime1907, .Rushaway",
 	description = "Logs button and trigger presses to the chat.",
-	version = "2.1.2",
+	version = "2.1.3",
 	url = ""
 };
 
@@ -286,13 +286,14 @@ public void TriggerTouched(const char[] output, int caller, int activator, float
 
 public void ButtonPressed(const char[] output, int caller, int activator, float delay)
 {
-#if defined _EntWatch_include
-	if (!IsValidClient(activator) || !IsValidEntity(caller) || EntWatch_IsSpecialItem(caller))
-#else
 	if (!IsValidClient(activator) || !IsValidEntity(caller))
-#endif
 		return;
 
+#if defined _EntWatch_include
+	int parent = GetEntPropEnt(caller, Prop_Data, "m_hParent");
+	if (IsValidEntity(parent) && EntWatch_IsSpecialItem(parent))
+		return;
+#endif
 	int currentTime = GetTime();
 
 	char entity[64];
