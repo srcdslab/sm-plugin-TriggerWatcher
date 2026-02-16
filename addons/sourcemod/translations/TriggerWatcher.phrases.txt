@@ -60,16 +60,6 @@
         "es"    "{1} {2} ({3}) spamea {4}"
     }
 
-    "TW_Display"
-    {
-        "#format"    "{1:s},{2:s}"
-        "en"    "{red}{1} {lightgreen}Display: {blue}{2}"
-        "fr"    "{red}{1} {lightgreen}Affichage: {blue}{2}"
-        "ru"    "{red}{1} {lightgreen}Отображение: {blue}{2}"
-        "chi"   "{red}{1} {lightgreen}显示: {blue}{2}"
-        "es"    "{red}{1} {lightgreen}Visualizacion: {blue}{2}"
-    }
-
     "TW_Mode_None"
     {
         "en"    "None"
