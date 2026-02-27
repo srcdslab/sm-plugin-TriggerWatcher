@@ -1,6 +1,6 @@
 project:
   sourceknight: 0.1
-  name: ButtonNotifier
+  name: TriggerWatcher
   dependencies:
     - name: sourcemod
       type: tar
@@ -27,4 +27,4 @@ project:
   root: /
   output: /addons/sourcemod/plugins
   targets:
-    - ButtonNotifier
+    - TriggerWatcher

@@ -1,0 +1,154 @@
+"Phrases"
+{
+    "TW_Trigger"
+    {
+        "#format"    "{1:s},{2:N},{3:s}"
+        "en"    "{red}{1} {white}{2} {lightgreen}triggered {blue}{3}"
+        "fr"    "{red}{1} {white}{2} {lightgreen}a declenche {blue}{3}"
+        "ru"    "{red}{1} {white}{2} {lightgreen}активировал {blue}{3}"
+        "chi"   "{red}{1} {white}{2} {lightgreen}触发了 {blue}{3}"
+        "es"    "{red}{1} {white}{2} {lightgreen}activo {blue}{3}"
+    }
+
+    "TW_Button"
+    {
+        "#format"    "{1:s},{2:N},{3:s}"
+        "en"    "{red}{1} {white}{2} {lightgreen}triggered {blue}{3}"
+        "fr"    "{red}{1} {white}{2} {lightgreen}a declenche {blue}{3}"
+        "ru"    "{red}{1} {white}{2} {lightgreen}активировал {blue}{3}"
+        "chi"   "{red}{1} {white}{2} {lightgreen}触发了 {blue}{3}"
+        "es"    "{red}{1} {white}{2} {lightgreen}activo {blue}{3}"
+    }
+
+    "TW_Spamming"
+    {
+        "#format"    "{1:s},{2:N},{3:s}"
+        "en"    "{red}{1} {white}{2} {lightgreen}spamming {blue}{3}"
+        "fr"    "{red}{1} {white}{2} {lightgreen}spam {blue}{3}"
+        "ru"    "{red}{1} {white}{2} {lightgreen}спамит {blue}{3}"
+        "chi"   "{red}{1} {white}{2} {lightgreen}正在刷 {blue}{3}"
+        "es"    "{red}{1} {white}{2} {lightgreen}spamea {blue}{3}"
+    }
+
+    "TW_Trigger_Console"
+    {
+        "#format"    "{1:s},{2:N},{3:s},{4:s}"
+        "en"    "{1} {2} ({3}) triggered {4}"
+        "fr"    "{1} {2} ({3}) a declenche {4}"
+        "ru"    "{1} {2} ({3}) активировал {4}"
+        "chi"   "{1} {2} ({3}) 触发了 {4}"
+        "es"    "{1} {2} ({3}) activo {4}"
+    }
+
+    "TW_Button_Console"
+    {
+        "#format"    "{1:s},{2:N},{3:s},{4:s}"
+        "en"    "{1} {2} ({3}) triggered {4}"
+        "fr"    "{1} {2} ({3}) a declenche {4}"
+        "ru"    "{1} {2} ({3}) активировал {4}"
+        "chi"   "{1} {2} ({3}) 触发了 {4}"
+        "es"    "{1} {2} ({3}) activo {4}"
+    }
+
+    "TW_Spamming_Console"
+    {
+        "#format"    "{1:s},{2:N},{3:s},{4:s}"
+        "en"    "{1} {2} ({3}) is spamming {4}"
+        "fr"    "{1} {2} ({3}) spam {4}"
+        "ru"    "{1} {2} ({3}) спамит {4}"
+        "chi"   "{1} {2} ({3}) 正在刷 {4}"
+        "es"    "{1} {2} ({3}) spamea {4}"
+    }
+
+    "TW_Mode_None"
+    {
+        "en"    "None"
+        "fr"    "Aucun"
+        "ru"    "Нет"
+        "chi"   "关闭"
+        "es"    "Ninguno"
+    }
+
+    "TW_Mode_Chat"
+    {
+        "en"    "Chat"
+        "fr"    "Chat"
+        "ru"    "Чат"
+        "chi"   "聊天"
+        "es"    "Chat"
+    }
+
+    "TW_Mode_Console"
+    {
+        "en"    "Console"
+        "fr"    "Console"
+        "ru"    "Консоль"
+        "chi"   "控制台"
+        "es"    "Consola"
+    }
+
+    "TW_Mode_Both"
+    {
+        "en"    "Both"
+        "fr"    "Les deux"
+        "ru"    "Оба"
+        "chi"   "两者"
+        "es"    "Ambos"
+    }
+
+    "TW_Menu_Cookie"
+    {
+        "en"    "TriggerWatcher Settings"
+        "fr"    "Parametres TriggerWatcher"
+        "ru"    "Настройки TriggerWatcher"
+        "chi"   "TriggerWatcher 设置"
+        "es"    "Configuracion de TriggerWatcher"
+    }
+
+    "TW_Menu_Title"
+    {
+        "en"    "TriggerWatcher Settings"
+        "fr"    "Parametres TriggerWatcher"
+        "ru"    "Настройки TriggerWatcher"
+        "chi"   "TriggerWatcher 设置"
+        "es"    "Configuracion de TriggerWatcher"
+    }
+
+    "TW_Menu_Buttons"
+    {
+        "en"    "Buttons"
+        "fr"    "Boutons"
+        "ru"    "Кнопки"
+        "chi"   "按钮"
+        "es"    "Botones"
+    }
+
+    "TW_Menu_Triggers"
+    {
+        "en"    "Triggers"
+        "fr"    "Declencheurs"
+        "ru"    "Триггеры"
+        "chi"   "触发器"
+        "es"    "Disparadores"
+    }
+
+    "TW_Menu_Buttons_Display"
+    {
+        "#format"    "{1:s}"
+        "en"    "Buttons: {1}"
+        "fr"    "Boutons: {1}"
+        "ru"    "Кнопки: {1}"
+        "chi"   "按钮: {1}"
+        "es"    "Botones: {1}"
+    }
+
+    "TW_Menu_Triggers_Display"
+    {
+        "#format"    "{1:s}"
+        "en"    "Triggers: {1}"
+        "fr"    "Declencheurs: {1}"
+        "ru"    "Триггеры: {1}"
+        "chi"   "触发器: {1}"
+        "es"    "Disparadores: {1}"
+    }
+}
