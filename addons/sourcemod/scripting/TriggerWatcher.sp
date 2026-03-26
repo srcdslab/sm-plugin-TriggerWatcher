@@ -21,10 +21,14 @@ enum NotifyMode
 #define TW_TAG "[TW]"
 #define TW_ENTITY_MAX 2047
 #define TW_ENTITY_ARRAY_SIZE (TW_ENTITY_MAX + 1)
+#define TW_CONSOLE_HEADER "--------------------[ Trigger Watcher ]--------------------"
+#define TW_CONSOLE_FOOTER "-----------------------------------------------------------"
 
 bool g_bLate = false;
+int g_iRoundStartedTime = 0;
 
 ConVar g_hCVar_SpamDelay;
+ConVar g_hCVar_FreezeTime;
 
 Cookie g_hCookie_DisplayType;
 
@@ -45,7 +49,7 @@ public Plugin myinfo =
 	name = "TriggerWatcher",
 	author = "Silence, maxime1907, .Rushaway",
 	description = "Logs button and trigger presses to the chat.",
-	version = "3.0.0",
+	version = "3.1.0",
 	url = ""
 };
 
@@ -69,6 +73,7 @@ public void OnPluginStart()
 
 	/* CONVARS */
 	g_hCVar_SpamDelay = CreateConVar("sm_TriggerWatcher_block_spam_delay", "5", "Time to wait before notifying the next button press (0 = disable spam detection)", FCVAR_NONE, true, 0.0, true, 60.0);
+	g_hCVar_FreezeTime = FindConVar("mp_freezetime");
 
 	AutoExecConfig(true);
 
@@ -97,11 +102,14 @@ public void OnPluginStart()
 
 public void OnMapStart()
 {
+	g_iRoundStartedTime = GetTime();
 	CreateTimer(1.0, Timer_HookEntities, _, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public void Event_RoundStart(Event hEvent, const char[] sName, bool bDontBroadcast)
 {
+	g_iRoundStartedTime = GetTime();
+
 	// Reset values
 	for (int i = 1; i <= TW_ENTITY_MAX; i++)
 	{
@@ -263,11 +271,10 @@ public void TriggerTouched(const char[] output, int caller, int activator, float
 
 	g_bTriggered[caller] = true;
 
-	char sClassname[32], entity[64], userid[64];
-	GetTriggerClassname(caller, sClassname, sizeof(sClassname));
-	GetTriggerDisplayName(caller, sClassname, entity, sizeof(entity));
-	BuildUserIdString(activator, userid, sizeof(userid), true, false);
-	NotifyTrigger(activator, userid, entity);
+	char entityName[64], className[32];
+	int entId;
+	GetEntityDetails(caller, entityName, sizeof(entityName), className, sizeof(className), entId);
+	NotifyTrigger(activator, entityName, className, entId);
 }
 
 public void ButtonPressed(const char[] output, int caller, int activator, float delay)
@@ -285,11 +292,9 @@ public void ButtonPressed(const char[] output, int caller, int activator, float 
 
 	int currentTime = GetTime();
 
-	char entity[64];
-	GetEntityDisplayName(caller, "button", entity, sizeof(entity));
-
-	char userid[64];
-	BuildUserIdString(activator, userid, sizeof(userid), false, true);
+	char entityName[64], className[32];
+	int entId;
+	GetEntityDetails(caller, entityName, sizeof(entityName), className, sizeof(className), entId);
 
 	// activator (client) is spamming the button
 	if (g_hCVar_SpamDelay.IntValue > 0 && g_ClientState[activator].lastButtonUse != -1 && ((currentTime - g_ClientState[activator].lastButtonUse) <= g_hCVar_SpamDelay.IntValue))
@@ -303,13 +308,13 @@ public void ButtonPressed(const char[] output, int caller, int activator, float 
 		// if everything is okay send a first alert
 		if (g_ClientState[activator].waitBeforeButtonUse == -1)
 		{
-			NotifyButton(activator, userid, entity, true);
+			NotifyButton(activator, entityName, className, entId, true);
 			g_ClientState[activator].waitBeforeButtonUse = currentTime + g_hCVar_SpamDelay.IntValue;
 		}
 	}
 	else
 	{
-		NotifyButton(activator, userid, entity, false);
+		NotifyButton(activator, entityName, className, entId, false);
 	}
 
 	g_ClientState[activator].lastButtonUse = currentTime;
@@ -329,36 +334,81 @@ bool ShouldNotifyClient(int client)
 	return IsClientConnected(client) && IsClientInGame(client) && (IsClientSourceTV(client) || GetAdminFlag(GetUserAdmin(client), Admin_Generic));
 }
 
-void GetTriggerClassname(int caller, char[] buffer, int maxlen)
+void GetEntityDetails(int caller, char[] entityName, int entityNameLen, char[] className, int classNameLen, int &entId)
 {
-	GetEdictClassname(caller, buffer, maxlen);
-	ReplaceString(buffer, maxlen, "trigger_", "", false);
+	GetEntPropString(caller, Prop_Data, "m_iName", entityName, entityNameLen);
+	GetEdictClassname(caller, className, classNameLen);
+
+	if (entityName[0] == '\0')
+	{
+		if (StrContains(className, "trigger_", false) == 0)
+			strcopy(entityName, entityNameLen, "*unnamed trigger*");
+		else if (StrContains(className, "button", false) != -1)
+			strcopy(entityName, entityNameLen, "*unnamed button*");
+		else
+			strcopy(entityName, entityNameLen, "*unnamed entity*");
+	}
+
+	entId = caller;
 }
 
-void GetEntityDisplayName(int caller, const char[] fallbackPrefix, char[] buffer, int maxlen)
+int GetCurrentRoundTime()
 {
-	GetEntPropString(caller, Prop_Data, "m_iName", buffer, maxlen);
-	if (strcmp(buffer, "", false) == 0)
-		FormatEx(buffer, maxlen, "%s #%d", fallbackPrefix, caller);
+	int freezeTime = 0;
+	if (g_hCVar_FreezeTime != null)
+		freezeTime = g_hCVar_FreezeTime.IntValue;
+
+	return GameRules_GetProp("m_iRoundTime") - ((GetTime() - g_iRoundStartedTime) - freezeTime);
 }
 
-void GetTriggerDisplayName(int caller, const char[] classname, char[] buffer, int maxlen)
+void BuildRoundTimeString(char[] buffer, int maxlen)
 {
-	FormatEx(buffer, maxlen, "trigger %s #%d", classname, caller);
+	int currentRoundTime = GetCurrentRoundTime();
+	if (currentRoundTime < 0)
+		currentRoundTime = 0;
+
+	int minutes = currentRoundTime / 60;
+	int seconds = currentRoundTime - (minutes * 60);
+	FormatEx(buffer, maxlen, "%d:%02d", minutes, seconds);
 }
 
-void BuildUserIdString(int client, char[] buffer, int maxlen, bool caseSensitive, bool stripSteamPrefix)
+void BuildChatPlayerIdentity(int client, char[] buffer, int maxlen)
 {
-	GetClientAuthId(client, AuthId_Steam3, buffer, maxlen, false);
-	ReplaceString(buffer, maxlen, "[", "", caseSensitive);
-	ReplaceString(buffer, maxlen, "]", "", caseSensitive);
-	Format(buffer, maxlen, "#%d|%s", GetClientUserId(client), buffer);
-	if (stripSteamPrefix)
-		ReplaceString(buffer, maxlen, "STEAM_", "", true);
+	FormatEx(buffer, maxlen, "%N [#%d]", client, GetClientUserId(client));
 }
 
-void NotifyTrigger(int activator, const char[] userid, const char[] entity)
+void BuildConsolePlayerIdentity(int client, char[] buffer, int maxlen)
 {
+	char steam[64];
+	if (!GetClientAuthId(client, AuthId_Steam3, steam, sizeof(steam), false))
+		strcopy(steam, sizeof(steam), "unknown");
+	else
+	{
+		ReplaceString(steam, sizeof(steam), "[", "", false);
+		ReplaceString(steam, sizeof(steam), "]", "", false);
+		ReplaceString(steam, sizeof(steam), "STEAM_", "", false);
+	}
+
+	FormatEx(buffer, maxlen, "%N [#%d | %s]", client, GetClientUserId(client), steam);
+}
+
+void PrintTriggerWatcher(int target, const char[] phrase, int activator, const char[] entityName, const char[] className, int entId, const char[] roundTime)
+{
+	char playerInfo[96];
+	BuildConsolePlayerIdentity(activator, playerInfo, sizeof(playerInfo));
+
+	if (target == 0)
+		PrintToServer("%s\n%T\n%s", TW_CONSOLE_HEADER, phrase, 0, playerInfo, entityName, className, entId, roundTime, TW_CONSOLE_FOOTER);
+	else
+		PrintToConsole(target, "%s\n%T\n%s", TW_CONSOLE_HEADER, phrase, target, playerInfo, entityName, className, entId, roundTime, TW_CONSOLE_FOOTER);
+}
+
+void NotifyTrigger(int activator, const char[] entityName, const char[] className, int entId)
+{
+	char roundTime[16], playerInfo[96];
+	BuildRoundTimeString(roundTime, sizeof(roundTime));
+	BuildChatPlayerIdentity(activator, playerInfo, sizeof(playerInfo));
+
 	for (int i = 1; i <= MaxClients; i++)
 	{
 		if (!ShouldNotifyClient(i))
@@ -366,16 +416,20 @@ void NotifyTrigger(int activator, const char[] userid, const char[] entity)
 
 		NotifyMode mode = g_ClientState[i].triggersDisplay;
 		if (mode == Notify_Console || mode == Notify_Both)
-			PrintToConsole(i, "%T", "TW_Trigger_Console", i, TW_TAG, activator, userid, entity);
+			PrintTriggerWatcher(i, "TW_Trigger_Console", activator, entityName, className, entId, roundTime);
 		if (mode == Notify_Chat || mode == Notify_Both)
-			CPrintToChat(i, "%t", "TW_Trigger", TW_TAG, activator, entity);
+			CPrintToChat(i, "%t", "TW_Trigger", TW_TAG, playerInfo, entityName, entId, roundTime);
 	}
 
-	PrintToServer("%T", "TW_Trigger_Console", 0, TW_TAG, activator, userid, entity);
+	PrintTriggerWatcher(0, "TW_Trigger_Console", activator, entityName, className, entId, roundTime);
 }
 
-void NotifyButton(int activator, const char[] userid, const char[] entity, bool isSpam)
+void NotifyButton(int activator, const char[] entityName, const char[] className, int entId, bool isSpam)
 {
+	char roundTime[16], playerInfo[96];
+	BuildRoundTimeString(roundTime, sizeof(roundTime));
+	BuildChatPlayerIdentity(activator, playerInfo, sizeof(playerInfo));
+
 	for (int i = 1; i <= MaxClients; i++)
 	{
 		if (!ShouldNotifyClient(i))
@@ -385,23 +439,23 @@ void NotifyButton(int activator, const char[] userid, const char[] entity, bool 
 		if (mode == Notify_Console || mode == Notify_Both)
 		{
 			if (isSpam)
-				PrintToConsole(i, "%T", "TW_Spamming_Console", i, TW_TAG, activator, userid, entity);
+				PrintTriggerWatcher(i, "TW_Spamming_Console", activator, entityName, className, entId, roundTime);
 			else
-				PrintToConsole(i, "%T", "TW_Button_Console", i, TW_TAG, activator, userid, entity);
+				PrintTriggerWatcher(i, "TW_Button_Console", activator, entityName, className, entId, roundTime);
 		}
 		if (mode == Notify_Chat || mode == Notify_Both)
 		{
 			if (isSpam)
-				CPrintToChat(i, "%t", "TW_Spamming", TW_TAG, activator, entity);
+				CPrintToChat(i, "%t", "TW_Spamming", TW_TAG, playerInfo, entityName, entId, roundTime);
 			else
-				CPrintToChat(i, "%t", "TW_Button", TW_TAG, activator, entity);
+				CPrintToChat(i, "%t", "TW_Button", TW_TAG, playerInfo, entityName, entId, roundTime);
 		}
 	}
 
 	if (isSpam)
-		PrintToServer("%T", "TW_Spamming_Console", 0, TW_TAG, activator, userid, entity);
+		PrintTriggerWatcher(0, "TW_Spamming_Console", activator, entityName, className, entId, roundTime);
 	else
-		PrintToServer("%T", "TW_Button_Console", 0, TW_TAG, activator, userid, entity);
+		PrintTriggerWatcher(0, "TW_Button_Console", activator, entityName, className, entId, roundTime);
 }
 
 NotifyMode ClampNotifyMode(NotifyMode value)
