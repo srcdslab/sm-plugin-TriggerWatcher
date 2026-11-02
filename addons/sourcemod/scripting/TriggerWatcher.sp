@@ -52,7 +52,7 @@ public Plugin myinfo =
 	name = "TriggerWatcher",
 	author = "Silence, maxime1907, .Rushaway",
 	description = "Logs button and trigger presses to the chat.",
-	version = "3.2.0",
+	version = "3.2.1",
 	url = ""
 };
 
