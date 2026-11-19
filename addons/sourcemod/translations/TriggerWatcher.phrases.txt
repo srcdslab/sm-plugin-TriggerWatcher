@@ -10,6 +10,12 @@
         "es"    "{red}{1} {white}{2} {lightgreen}tocó {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "de"    "{red}{1} {white}{2} {lightgreen}berührte {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "pt"    "{red}{1} {white}{2} {lightgreen}tocou {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "pl"    "{red}{1} {white}{2} {lightgreen}dotknął się {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "tr"    "{red}{1} {white}{2} {lightgreen}dokundu {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "it"    "{red}{1} {white}{2} {lightgreen}ha toccato {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "ua"    "{red}{1} {white}{2} {lightgreen}торкнувся {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "zho"   "{red}{1} {white}{2} {lightgreen}觸碰了 {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "cze"   "{red}{1} {white}{2} {lightgreen}se dotkl {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
     }
 
     "TW_Button"
@@ -22,6 +28,12 @@
         "es"    "{red}{1} {white}{2} {lightgreen}presionó {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "de"    "{red}{1} {white}{2} {lightgreen}drückte {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "pt"    "{red}{1} {white}{2} {lightgreen}apertou {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "pl"    "{red}{1} {white}{2} {lightgreen}nacisnął {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "tr"    "{red}{1} {white}{2} {lightgreen}bastı {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "it"    "{red}{1} {white}{2} {lightgreen}ha premuto {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "ua"    "{red}{1} {white}{2} {lightgreen}натиснув {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "zho"   "{red}{1} {white}{2} {lightgreen}按下了 {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "cze"   "{red}{1} {white}{2} {lightgreen}stiskl {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
     }
 
     "TW_Spamming"
@@ -34,6 +46,12 @@
         "es"    "{red}{1} {white}{2} {lightgreen}spamea {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "de"    "{red}{1} {white}{2} {lightgreen}spammt {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
         "pt"    "{red}{1} {white}{2} {lightgreen}está spammando {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "pl"    "{red}{1} {white}{2} {lightgreen}spamuje {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "tr"    "{red}{1} {white}{2} {lightgreen}spam yapıyor {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "it"    "{red}{1} {white}{2} {lightgreen}sta spammando {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "ua"    "{red}{1} {white}{2} {lightgreen}спамить {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "zho"   "{red}{1} {white}{2} {lightgreen}正在刷 {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
+        "cze"   "{red}{1} {white}{2} {lightgreen}spamuje {blue}{3} {white}(#{4}) {lightgreen}@ {olive}{5}"
     }
 
     "TW_Trigger_Console"
@@ -46,6 +64,12 @@
         "es"    "{1} tocó {2} ({3} | #{4}) @ {5}"
         "de"    "{1} berührte {2} ({3} | #{4}) @ {5}"
         "pt"    "{1} tocou {2} ({3} | #{4}) @ {5}"
+        "pl"    "{1} dotknął się {2} ({3} | #{4}) @ {5}"
+        "tr"    "{1} dokundu {2} ({3} | #{4}) @ {5}"
+        "it"    "{1} ha toccato {2} ({3} | #{4}) @ {5}"
+        "ua"    "{1} торкнувся {2} ({3} | #{4}) @ {5}"
+        "zho"   "{1} 觸碰了 {2} ({3} | #{4}) @ {5}"
+        "cze"   "{1} se dotkl {2} ({3} | #{4}) @ {5}"
     }
 
     "TW_Button_Console"
@@ -58,6 +82,12 @@
         "es"    "{1} presionó {2} ({3} | #{4}) @ {5}"
         "de"    "{1} drückte {2} ({3} | #{4}) @ {5}"
         "pt"    "{1} apertou {2} ({3} | #{4}) @ {5}"
+        "pl"    "{1} nacisnął {2} ({3} | #{4}) @ {5}"
+        "tr"    "{1} bastı {2} ({3} | #{4}) @ {5}"
+        "it"    "{1} ha premuto {2} ({3} | #{4}) @ {5}"
+        "ua"    "{1} натиснув {2} ({3} | #{4}) @ {5}"
+        "zho"   "{1} 按下了 {2} ({3} | #{4}) @ {5}"
+        "cze"   "{1} stiskl {2} ({3} | #{4}) @ {5}"
     }
 
     "TW_Spamming_Console"
@@ -70,6 +100,12 @@
         "es"    "{1} spamea {2} ({3} | #{4}) @ {5}"
         "de"    "{1} spammt {2} ({3} | #{4}) @ {5}"
         "pt"    "{1} está spammando {2} ({3} | #{4}) @ {5}"
+        "pl"    "{1} spamuje {2} ({3} | #{4}) @ {5}"
+        "tr"    "{1} spam yapıyor {2} ({3} | #{4}) @ {5}"
+        "it"    "{1} sta spammando {2} ({3} | #{4}) @ {5}"
+        "ua"    "{1} спамить {2} ({3} | #{4}) @ {5}"
+        "zho"   "{1} 正在刷 {2} ({3} | #{4}) @ {5}"
+        "cze"   "{1} spamuje {2} ({3} | #{4}) @ {5}"
     }
 
     "TW_Mode_None"
@@ -81,6 +117,12 @@
         "es"    "Ninguno"
         "de"    "Aus"
         "pt"    "Nenhum"
+        "pl"    "Brak"
+        "tr"    "Hiçbiri"
+        "it"    "Nessuno"
+        "ua"    "Немає"
+        "zho"   "無"
+        "cze"   "Žádné"
     }
 
     "TW_Mode_Chat"
@@ -92,6 +134,12 @@
         "es"    "Chat"
         "de"    "Chat"
         "pt"    "Chat"
+        "pl"    "Czat"
+        "tr"    "Sohbet"
+        "it"    "Chat"
+        "ua"    "Чат"
+        "zho"   "聊天"
+        "cze"   "Chat"
     }
 
     "TW_Mode_Console"
@@ -103,6 +151,12 @@
         "es"    "Consola"
         "de"    "Konsole"
         "pt"    "Console"
+        "pl"    "Konsola"
+        "tr"    "Konsol"
+        "it"    "Console"
+        "ua"    "Консоль"
+        "zho"   "控制台"
+        "cze"   "Konzole"
     }
 
     "TW_Mode_Both"
@@ -114,6 +168,12 @@
         "es"    "Ambos"
         "de"    "Beides"
         "pt"    "Ambos"
+        "pl"    "Oba"
+        "tr"    "İkisi"
+        "it"    "Entrambi"
+        "ua"    "Обидва"
+        "zho"   "兩者"
+        "cze"   "Obojí"
     }
 
     "TW_Menu_Cookie"
@@ -125,6 +185,12 @@
         "es"    "Configuración de TriggerWatcher"
         "de"    "TriggerWatcher-Einstellungen"
         "pt"    "Configurações do TriggerWatcher"
+        "pl"    "Ustawienia TriggerWatcher"
+        "tr"    "TriggerWatcher Ayarları"
+        "it"    "Impostazioni TriggerWatcher"
+        "ua"    "Налаштування TriggerWatcher"
+        "zho"   "TriggerWatcher 設定"
+        "cze"   "Nastavení TriggerWatcher"
     }
 
     "TW_Menu_Title"
@@ -136,6 +202,12 @@
         "es"    "Configuración de TriggerWatcher"
         "de"    "TriggerWatcher-Einstellungen"
         "pt"    "Configurações do TriggerWatcher"
+        "pl"    "Ustawienia TriggerWatcher"
+        "tr"    "TriggerWatcher Ayarları"
+        "it"    "Impostazioni TriggerWatcher"
+        "ua"    "Налаштування TriggerWatcher"
+        "zho"   "TriggerWatcher 設定"
+        "cze"   "Nastavení TriggerWatcher"
     }
 
     "TW_Menu_Buttons"
@@ -147,6 +219,12 @@
         "es"    "Botones"
         "de"    "Buttons"
         "pt"    "Botões"
+        "pl"    "Przyciski"
+        "tr"    "Düğmeler"
+        "it"    "Pulsanti"
+        "ua"    "Кнопки"
+        "zho"   "按鈕"
+        "cze"   "Tlačítka"
     }
 
     "TW_Menu_Triggers"
@@ -158,6 +236,12 @@
         "es"    "Disparadores"
         "de"    "Trigger"
         "pt"    "Triggers"
+        "pl"    "Triggery"
+        "tr"    "Tetikleyiciler"
+        "it"    "Trigger"
+        "ua"    "Тригери"
+        "zho"   "觸發器"
+        "cze"   "Triggery"
     }
 
     "TW_Menu_Buttons_Display"
@@ -170,6 +254,12 @@
         "es"    "Botones: {1}"
         "de"    "Buttons: {1}"
         "pt"    "Botões: {1}"
+        "pl"    "Przyciski: {1}"
+        "tr"    "Düğmeler: {1}"
+        "it"    "Pulsanti: {1}"
+        "ua"    "Кнопки: {1}"
+        "zho"   "按鈕: {1}"
+        "cze"   "Tlačítka: {1}"
     }
 
     "TW_Menu_Triggers_Display"
@@ -182,5 +272,11 @@
         "es"    "Disparadores: {1}"
         "de"    "Trigger: {1}"
         "pt"    "Triggers: {1}"
+        "pl"    "Triggery: {1}"
+        "tr"    "Tetikleyiciler: {1}"
+        "it"    "Trigger: {1}"
+        "ua"    "Тригери: {1}"
+        "zho"   "觸發器: {1}"
+        "cze"   "Triggery: {1}"
     }
 }
